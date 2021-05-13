@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Install all dotfiles into the home directory
 
 if [ -L "$0" ]
@@ -81,4 +81,4 @@ then
 fi
 
 # Install packages
-./script/install-packages
+$(dirname $0)/install-packages
