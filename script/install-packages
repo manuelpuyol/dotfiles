@@ -18,14 +18,40 @@ then
   brew bundle
 elif [ $LINUX ]
 then
+  # Arch
+  if command -v pacman &> /dev/null
+  then
+    pacman -S git base-devel
+
+    # Install YaY
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
+    cd ..
+    rm -rf yay
+
+    yay -Syu kitty \
+      zsh \
+      zsh-autosuggestions \
+      vim \
+      otf-hasklig
+  elif command -v apt &> /dev/null
+  then
+    apt install -y git \
+     kitty \
+     zsh \
+     zsh-autosuggestions \
+     vim \
+  else
+    # kitty
+    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+
+    # zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  fi
+
   # starship
   FORCE=1 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
-
-  # kitty
-  curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-
-  # zsh-autocomplete
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
 
 ./script/install-vscode-extensions

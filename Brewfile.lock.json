@@ -2,7 +2,7 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "58f7a7cee3d3fe748a3e67eef6c3eb483588c409"
+        "revision": "070555cb01f901600a70786970035940ca586c1f"
       }
     },
     "brew": {
@@ -82,6 +82,35 @@
             }
           }
         }
+      },
+      "vim": {
+        "version": "8.2.2825",
+        "bottle": {
+          "rebuild": 0,
+          "root_url": "https://ghcr.io/v2/homebrew/core",
+          "files": {
+            "arm64_big_sur": {
+              "cellar": "/opt/homebrew/Cellar",
+              "url": "https://ghcr.io/v2/homebrew/core/vim/blobs/sha256:b1c8d24c69aa002f4db66c69291dd2463385b637c922d333e2e660cbca78b350",
+              "sha256": "b1c8d24c69aa002f4db66c69291dd2463385b637c922d333e2e660cbca78b350"
+            },
+            "big_sur": {
+              "cellar": "/usr/local/Cellar",
+              "url": "https://ghcr.io/v2/homebrew/core/vim/blobs/sha256:ed34f222a290d61f6ab7a8d6dac7301b69ce339180a3c6fa3bc300e5dbbbd0a2",
+              "sha256": "ed34f222a290d61f6ab7a8d6dac7301b69ce339180a3c6fa3bc300e5dbbbd0a2"
+            },
+            "catalina": {
+              "cellar": "/usr/local/Cellar",
+              "url": "https://ghcr.io/v2/homebrew/core/vim/blobs/sha256:26ca29d1533fc930f7f82323a93241b497f9495d7ac4a50c846cfa2e7932de29",
+              "sha256": "26ca29d1533fc930f7f82323a93241b497f9495d7ac4a50c846cfa2e7932de29"
+            },
+            "mojave": {
+              "cellar": "/usr/local/Cellar",
+              "url": "https://ghcr.io/v2/homebrew/core/vim/blobs/sha256:466c0b0604f878b74d56326826d8399eb33253258819063b11f3f9515ad5e055",
+              "sha256": "466c0b0604f878b74d56326826d8399eb33253258819063b11f3f9515ad5e055"
+            }
+          }
+        }
       }
     },
     "cask": {
@@ -104,7 +133,7 @@
       "big_sur": {
         "HOMEBREW_VERSION": "3.1.7",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "483437c30369bbfb0c35b55b760ae9cff3551668",
+        "Homebrew/homebrew-core": "c32c610255f122e256a605cb76a5f8794679008a",
         "CLT": "12.4.0.0.1.1610135815",
         "Xcode": "12.4",
         "macOS": "11.1"
