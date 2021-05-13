@@ -1,3 +1,3 @@
 ### Dotfiles
 
-Just that.
+Based on https://github.com/MikeMcQuaid/dotfiles
