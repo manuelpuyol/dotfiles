@@ -1,0 +1,29 @@
+{
+  "workbench.colorTheme": "Ayu Mirage",
+  "editor.fontFamily": "Hasklig, Menlo, Monaco, 'Courier New', monospace",
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "all",
+  "editor.fontLigatures": true,
+  "explorer.confirmDelete": false,
+  "files.trimTrailingWhitespace": true,
+  "gitlens.codeLens.enabled": false,
+  "search.exclude": {
+      "vendor/": true
+  },
+  "files.exclude": {
+      "node_modules": true,
+      "vendor/bundle": true
+  },
+  "testExplorer.addToEditorContextMenu": true,
+  "testExplorer.hideEmptyLog": false,
+  "rubyTestExplorer.logpanel": true,
+  "workspaceExplorer.workspaceStorageDirectory": "/Users/manuelpuyol/vscode",
+  "explorer.confirmDragAndDrop": false,
+  "copilot.secret_key": "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",
+  "files.insertFinalNewline": true,
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.editor.untitled.hint": "hidden",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.tabs.enabled": true
+}
