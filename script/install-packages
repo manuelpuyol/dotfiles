@@ -16,7 +16,7 @@ then
 elif [ $LINUX ]
 then
   # starship
-  sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+  FORCE=1 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 
   # kitty
   curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
