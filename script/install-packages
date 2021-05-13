@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 [ $(uname -s) = "Darwin" ] && export MACOS=1 && export UNIX=1
 [ $(uname -s) = "Linux" ] && export LINUX=1 && export UNIX=1
@@ -54,5 +54,5 @@ then
   FORCE=1 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 fi
 
-./script/install-vscode-extensions
+$(dirname $0)/install-vscode-extensions
 
