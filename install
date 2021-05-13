@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "==> Adding symlinks .config"
+cp -r --symbolic-link /workspaces/.codespaces/.persistedshare/dotfiles/* ~
+cp -r --symbolic-link /workspaces/.codespaces/.persistedshare/dotfiles/.config/* ~/.config
+
+echo "==> Installing Homebrew"
+
+CI=1 su -c '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"' vscode
+brew bundle
+
+echo "==> Installing oh-my-zsh"
+
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+cp .zshrc ~/.zshrc
+
