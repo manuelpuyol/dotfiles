@@ -1,0 +1,26 @@
+#!/bin/sh
+
+[ $(uname -s) = "Darwin" ] && export MACOS=1 && export UNIX=1
+[ $(uname -s) = "Linux" ] && export LINUX=1 && export UNIX=1
+
+cd $HOME
+
+if [ $MACOS ]
+then
+  # homebrew
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  # Install packages
+  mv .Brewfile Brewfile
+  brew bundle
+elif [ $LINUX ]
+  # starship
+  sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+
+  # kitty
+  curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+then
+fi
+
+# oh-my-zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

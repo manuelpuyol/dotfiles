@@ -28,6 +28,7 @@ then
   VSCODE="$APPDATA/Code/User"
 fi
 
+# Move dotfiles to home directory
 for DOTFILE in *; do
   HOMEFILE="$HOME/.$DOTFILE"
   [ -d $DOTFILE ] && DOTFILE="$DOTFILE/"
@@ -75,3 +76,6 @@ if [ -n "$CODESPACES" ]
 then
   chmod 700 /workspaces
 fi
+
+# Install packages
+./script/install-packages
