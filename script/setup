@@ -47,9 +47,12 @@ for DOTFILE in *; do
        HOMEFILE="$VSCODE/keybindings.json" &&
        mkdir -p "$VSCODE"
 
-  # Fixup Brewfile
-  echo $DOTFILE | grep -q 'Brewfile' &&
-       HOMEFILE="$HOME/$(echo $DOTFILE | sed -e 's/\.B/B/')"
+  if [ $MACOS ]
+  then
+    # Fixup Brewfile
+    echo $DOTFILE | grep -q 'Brewfile' &&
+        HOMEFILE="$HOME/$(echo $DOTFILE | sed -e 's/\.B/B/')"
+  fi
 
   if [ $UNIX ]
   then
