@@ -5,6 +5,9 @@
 
 cd $HOME
 
+# oh-my-zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 if [ $MACOS ]
 then
   # homebrew
@@ -20,7 +23,7 @@ then
 
   # kitty
   curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-fi
 
-# oh-my-zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  # zsh-autocomplete
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
