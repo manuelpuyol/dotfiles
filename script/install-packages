@@ -1,7 +1,7 @@
 #!/bin/bash
 
-[ $(uname -s) = "Darwin" ] && export MACOS=1 && export UNIX=1
-[ $(uname -s) = "Linux" ] && export LINUX=1 && export UNIX=1
+[ $(uname -s) = "Darwin" ] && export MACOS=1
+[ $(uname -s) = "Linux" ] && export LINUX=1
 
 cd $HOME
 
@@ -21,9 +21,19 @@ then
   brew bundle
 elif [ $LINUX ]
 then
+  packages=(
+    fzf
+    git
+    kitty
+    rbenv
+    zsh
+    zsh-autosuggestions
+    vim
+  )
   # Arch
   if command -v pacman &> /dev/null
   then
+    packages+=(otf-hasklig starship)
     pacman -S git base-devel
 
     # Install YaY
@@ -33,30 +43,16 @@ then
     cd ..
     rm -rf yay
 
-    yay -Syu kitty \
-      zsh \
-      zsh-autosuggestions \
-      vim \
-      otf-hasklig \
-      fzf
+    yay -Syu $packages
   elif command -v apt &> /dev/null
   then
-    apt install -y git \
-     kitty \
-     zsh \
-     zsh-autosuggestions \
-     vim \
-     fzf
+    apt install -y $packages
+
+    # starship
+    FORCE=1 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
   else
-    # kitty
-    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-
-    # zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    echo "I don't know how to install packages on your system."
   fi
-
-  # starship
-  FORCE=1 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 fi
 
 $(dirname $0)/install-vscode-extensions

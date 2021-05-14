@@ -1,6 +1,7 @@
 tap "homebrew/cask"
 
 brew "fzf"
+brew "rbenv"
 brew "starship"
 brew "vim"
 brew "zsh"
