@@ -1,9 +1,10 @@
 tap "homebrew/cask"
 
+brew "fzf"
 brew "starship"
+brew "vim"
 brew "zsh"
 brew "zsh-autosuggestions"
-brew "vim"
 
 cask "font-hasklig"
 cask "kitty"

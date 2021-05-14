@@ -8,6 +8,9 @@ cd $HOME
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# fzf-tab
+git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+
 if [ $MACOS ]
 then
   # homebrew
@@ -34,7 +37,8 @@ then
       zsh \
       zsh-autosuggestions \
       vim \
-      otf-hasklig
+      otf-hasklig \
+      fzf
   elif command -v apt &> /dev/null
   then
     apt install -y git \
@@ -42,6 +46,7 @@ then
      zsh \
      zsh-autosuggestions \
      vim \
+     fzf
   else
     # kitty
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
