@@ -45,10 +45,16 @@ then
     cd ..
     rm -rf yay
 
-    yay -Syu $packages
+    for package in "${packages[@]}"
+    do
+      yay -Sy $package
+    done
   elif command -v apt &> /dev/null
   then
-    apt install -y $packages
+    for package in "${packages[@]}"
+    do
+      apt install -y $package
+    done
 
     # starship
     FORCE=1 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
@@ -58,4 +64,3 @@ then
 fi
 
 $(dirname $0)/install-vscode-extensions
-
