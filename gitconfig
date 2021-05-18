@@ -5,8 +5,6 @@
   user = manuelpuyol
 [push]
   default = simple
-[credential]
-  helper = osxkeychain
 [diff]
   tool = meld
 [difftool]
