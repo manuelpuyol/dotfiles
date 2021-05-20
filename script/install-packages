@@ -1,5 +1,15 @@
 #!/bin/bash
 
+SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+
+echo
+echo
+echo "##################################################"
+echo "############## Installing packages ###############"
+echo "##################################################"
+echo
+echo
+
 [ $(uname -s) = "Darwin" ] && export MACOS=1
 [ $(uname -s) = "Linux" ] && export LINUX=1
 
@@ -17,7 +27,6 @@ then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   # Install packages
-  mv .Brewfile Brewfile
   brew bundle
 elif [ $LINUX ]
 then
@@ -63,4 +72,4 @@ then
   fi
 fi
 
-$(dirname $0)/install-vscode-extensions
+$SCRIPTPATH/install-vscode-extensions

@@ -1,6 +1,8 @@
 #!/bin/bash
 # Install all dotfiles into the home directory
 
+SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+
 if [ -L "$0" ]
 then
   SCRIPTSETUP="$(readlink "$0")"
@@ -29,6 +31,14 @@ then
 fi
 
 # Move dotfiles to home directory
+echo
+echo
+echo "##################################################"
+echo "####### Moving dotfiles to home directory ########"
+echo "##################################################"
+echo
+echo
+
 for DOTFILE in *; do
   HOMEFILE="$HOME/.$DOTFILE"
   [ -d $DOTFILE ] && DOTFILE="$DOTFILE/"
@@ -81,4 +91,4 @@ then
 fi
 
 # Install packages
-$(dirname $0)/install-packages
+$SCRIPTPATH/install-packages
