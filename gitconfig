@@ -1,10 +1,14 @@
-[user]
-  name = Manuel Puyol
-  email = manuelpuyol@github.com
-[github]
-  user = manuelpuyol
-[push]
-  default = simple
+[color]
+  ui = auto
+[core]
+  commitGraph = true
+  editor = vim
+  excludesfile = ~/.gitignore
+  quotepath = on
+[credential]
+  helper = dotfiles
+[credential "https://github.com"]
+  username = manuelpuyol
 [diff]
   tool = meld
 [difftool]
@@ -12,6 +16,13 @@
 [difftool "meld"]
   trustExitCode = true
   cmd = open -W -a Meld --args \"$LOCAL\" \"$PWD/$REMOTE\"
+[fetch]
+  prune = true
+  writeCommitGraph = true
+[gc]
+  writeCommitGraph = true
+[github]
+  user = manuelpuyol
 [merge]
   tool = meld
 [mergetool]
@@ -19,6 +30,12 @@
 [mergetool "meld"]
   trustExitCode = true
   cmd = open -W -a Meld --args --auto-merge \"$PWD/$LOCAL\" \"$PWD/$BASE\" \"$PWD/$REMOTE\" --output=\"$PWD/$MERGED\"
-[core]
-  editor = vim
-
+[protocol]
+  version = 2
+[push]
+  default = simple
+[tag]
+  sort = -version:refname
+[user]
+  name = Manuel Puyol
+  email = manuelpuyol@github.com
