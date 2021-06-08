@@ -48,5 +48,17 @@
     "terminal.ansiBrightMagenta": "#ff6ac1",
     "terminal.ansiBrightCyan": "#9aedfe",
     "terminal.ansiBrightWhite": "#eff0eb"
+  },
+  "githubIssues.ignoreCompletionTrigger": [
+    "python",
+    "makefile",
+    "ruby",
+    "erb"
+  ],
+  "copilot.enabled": {
+    "*": true,
+    "yaml": false,
+    "plaintext": false,
+    "markdown": true
   }
 }
