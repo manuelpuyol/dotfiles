@@ -1,3 +1,5 @@
 config/configstore
 config/gatsby
 config/karabiner/automatic_backups/
+rbenv/shims/
+rbenv/versions/

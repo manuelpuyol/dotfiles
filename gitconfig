@@ -7,8 +7,6 @@
   quotepath = on
 [credential]
   helper = dotfiles
-[credential "https://github.com"]
-  username = manuelpuyol
 [diff]
   tool = meld
 [difftool]
