@@ -60,5 +60,15 @@
     "plaintext": false,
     "markdown": true
   },
-  "editor.inlineSuggest.enabled": true
+  "editor.inlineSuggest.enabled": true,
+  "[ruby]": {
+    "editor.defaultFormatter": "misogi.ruby-rubocop",
+    "editor.codeActionsOnSave": {
+      "editor.action.formatDocument": true
+    }
+  },
+  "[html.erb]": {
+    "editor.defaultFormatter": "manuelpuyol.erb-linter",
+    "editor.formatOnSave": true
+  },
 }
