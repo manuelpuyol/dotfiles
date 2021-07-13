@@ -19,7 +19,6 @@
   "rubyTestExplorer.logpanel": true,
   "workspaceExplorer.workspaceStorageDirectory": "/Users/manuelpuyol/vscode",
   "explorer.confirmDragAndDrop": false,
-  "copilot.secret_key": "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",
   "files.insertFinalNewline": true,
   "workbench.startupEditor": "newUntitledFile",
   "workbench.editor.untitled.hint": "hidden",
