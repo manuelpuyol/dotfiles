@@ -19,8 +19,6 @@
   writeCommitGraph = true
 [gc]
   writeCommitGraph = true
-[github]
-  user = manuelpuyol
 [merge]
   tool = meld
 [mergetool]

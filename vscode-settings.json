@@ -85,6 +85,10 @@
   },
   "[html.erb]": {
     "editor.defaultFormatter": "manuelpuyol.erb-linter",
-    "editor.formatOnSave": true
-  }
+    "editor.formatOnSave": false
+  },
+  "[erb]": {
+    "editor.defaultFormatter": "manuelpuyol.erb-linter",
+    "editor.formatOnSave": false
+  },
 }
