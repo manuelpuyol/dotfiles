@@ -6,6 +6,7 @@
   "editor.inlineSuggest.enabled": true,
   "editor.renderWhitespace": "all",
   "editor.tabSize": 2,
+  "editor.bracketPairColorization.enabled": true,
   // explorer
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
@@ -76,6 +77,8 @@
   "rubyTestExplorer.logpanel": true,
   // Workspace Explorer
   "workspaceExplorer.workspaceStorageDirectory": "/Users/manuelpuyol/vscode",
+  // Rubocop
+  "ruby.rubocop.useBundler": true,
   // Languages
   "[ruby]": {
     "editor.defaultFormatter": "misogi.ruby-rubocop",
@@ -90,5 +93,5 @@
   "[erb]": {
     "editor.defaultFormatter": "manuelpuyol.erb-linter",
     "editor.formatOnSave": false
-  },
+  }
 }
