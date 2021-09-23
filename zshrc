@@ -12,6 +12,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias gh="cd ~/github/github"
 alias pvc="cd ~/primer/view_components"
+alias gdev="cd ~/Documents/gamedev"
 
 eval "$(starship init zsh)"
 eval "$(rbenv init -)"
