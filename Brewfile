@@ -1,5 +1,6 @@
 tap "homebrew/cask"
 
+brew "gh"
 brew "fzf"
 brew "mpv"
 brew "nvm"
