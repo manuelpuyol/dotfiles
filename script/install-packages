@@ -42,7 +42,7 @@ then
   if command -v pacman &> /dev/null
   then
     packages+=(nvm otf-hasklig starship)
-    pacman -S git base-devel
+    pacman -S git base-devel github-cli
 
     # Install YaY
     git clone https://aur.archlinux.org/yay.git
@@ -61,6 +61,12 @@ then
     do
       apt install -y $package
     done
+
+    # gh
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+    sudo apt update
+    sudo apt install gh
 
     # nvm
     curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
