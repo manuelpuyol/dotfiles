@@ -45,7 +45,7 @@ then
   if command -v pacman &> /dev/null
   then
     packages+=(nvm otf-hasklig starship)
-    pacman -S git base-devel github-cli
+    sudo pacman -S git base-devel github-cli
 
     # Install YaY
     git clone https://aur.archlinux.org/yay.git
@@ -62,7 +62,7 @@ then
   then
     for package in "${packages[@]}"
     do
-      apt install -y $package
+      sudo apt install -y $package
     done
 
     # gh
