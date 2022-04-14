@@ -13,3 +13,4 @@ brew "zsh-autosuggestions"
 
 cask "font-hasklig"
 cask "kitty"
+cask "raycast"
