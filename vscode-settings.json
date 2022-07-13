@@ -81,6 +81,9 @@
   "workspaceExplorer.workspaceStorageDirectory": "/Users/manuelpuyol/vscode",
   // Rubocop
   "ruby.rubocop.useBundler": true,
+  // ESLint
+  "eslint.format.enable": true,
+  "eslint.codeActionsOnSave.mode": "problems",
   // Languages
   "[ruby]": {
     "editor.defaultFormatter": "misogi.ruby-rubocop",
@@ -95,6 +98,10 @@
   "[erb]": {
     "editor.defaultFormatter": "manuelpuyol.erb-linter",
     "editor.formatOnSave": false
+  },
+  "[javascript][typescript][typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnSave": true
   },
   "security.workspace.trust.untrustedFiles": "open",
   "github.copilot.enable": {
