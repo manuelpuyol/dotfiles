@@ -23,16 +23,8 @@
     "vendor/": true
   },
   //terminal
-  "terminal.integrated.profiles.linux": {
-    "zsh": {
-      "path": "zsh"
-    }
-  },
-  "terminal.integrated.profiles.osx": {
-    "zsh": {
-      "path": "zsh"
-    }
-  },
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.tabs.enabled": true,
   "terminal.integrated.enableMultiLinePasteWarning": false,
   // workbench
