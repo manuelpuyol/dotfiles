@@ -96,5 +96,12 @@
     "editor.defaultFormatter": "manuelpuyol.erb-linter",
     "editor.formatOnSave": false
   },
-  "security.workspace.trust.untrustedFiles": "open"
+  "security.workspace.trust.untrustedFiles": "open",
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": false,
+    "plaintext": false,
+    "markdown": false,
+    "html": false
+  }
 }
