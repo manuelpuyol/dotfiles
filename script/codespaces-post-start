@@ -1,9 +1,12 @@
 #!/bin/sh
 # Run by github/github codespaces after starting
 
+SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+
 # Always want to use ZSH as my default shell (e.g. for SSH)
 if ! grep -q "root.*/bin/zsh" /etc/passwd
 then
   chsh -s /bin/zsh $(whoami)
 fi
 
+$SCRIPTPATH/install-vscode-extensions

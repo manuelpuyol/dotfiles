@@ -84,11 +84,10 @@ then
   ln -sf "$DOTFILESDIR" "$HOMEDOTFILES"
 fi
 
-# Fix up permissions for Codespaces
-# if [ -n "$CODESPACES" ]
-# then
-#   chmod 700 /workspaces
-# fi
-
-# Install packages
-$SCRIPTPATH/install-packages
+# Install all VSCode extensions if not in a codespace
+if [ -n "$CODESPACES" ]
+then
+  echo "in codespace"
+else
+  $SCRIPTPATH/install-packages
+fi
