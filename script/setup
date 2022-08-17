@@ -84,10 +84,4 @@ then
   ln -sf "$DOTFILESDIR" "$HOMEDOTFILES"
 fi
 
-# Install all VSCode extensions if not in a codespace
-if [ -n "$CODESPACES" ]
-then
-  echo "in codespace"
-else
-  $SCRIPTPATH/install-packages
-fi
+$SCRIPTPATH/install-packages

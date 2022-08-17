@@ -81,4 +81,11 @@ then
   fi
 fi
 
-$SCRIPTPATH/install-vscode-extensions
+# Install all VSCode extensions if not in a codespace
+if [ -n "$CODESPACES" ]
+then
+  echo "in codespace"
+else
+  $SCRIPTPATH/install-vscode-extensions
+fi
+
