@@ -4,3 +4,4 @@ config/yarn
 config/karabiner/automatic_backups/
 rbenv/shims/
 rbenv/versions/
+config/gh/hosts.yml
