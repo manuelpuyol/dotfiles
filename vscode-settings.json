@@ -16,7 +16,8 @@
   "files.trimTrailingWhitespace": true,
   "files.exclude": {
     "node_modules": true,
-    "vendor/bundle": true
+    "vendor/bundle": true,
+    "**/*.tsbuildinfo": true
   },
   // search
   "search.exclude": {
@@ -110,5 +111,6 @@
     "plaintext": false,
     "markdown": false,
     "html": false
-  }
+  },
+  "githubPullRequests.terminalLinksHandler": "github"
 }
