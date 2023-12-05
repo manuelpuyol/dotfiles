@@ -1,7 +1,7 @@
 {
   // editor
-  "editor.fontFamily": "Hasklig, Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontLigatures": true,
+  "editor.fontFamily": "'Monaspace Krypton Light', monospace",
+  "editor.fontLigatures": "'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03'",
   "editor.formatOnSave": false,
   "editor.inlineSuggest.enabled": true,
   "editor.renderWhitespace": "all",
@@ -26,11 +26,11 @@
   //terminal
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.scrollback": 10000,
   "terminal.integrated.tabs.enabled": true,
   "terminal.integrated.enableMultiLinePasteWarning": false,
   // workbench
   "workbench.colorTheme": "Ayu Mirage",
-  "workbench.editor.untitled.hint": "hidden",
   "workbench.startupEditor": "newUntitledFile",
   "workbench.colorCustomizations": {
     "terminal.background": "#282a36",
@@ -85,6 +85,23 @@
   // ESLint
   "eslint.format.enable": true,
   "eslint.codeActionsOnSave.mode": "problems",
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "json"
+  ],
+  "eslint.workingDirectories": [
+    "app/assets/modules",
+    "app/assets/preview_modules",
+    "app/assets/types",
+    "app/components",
+    "test/components",
+    "test/js",
+    {
+      "pattern": "./ui/packages/*/"
+    }
+  ],
   // Languages
   "[ruby]": {
     "editor.defaultFormatter": "misogi.ruby-rubocop",
@@ -100,7 +117,7 @@
     "editor.defaultFormatter": "manuelpuyol.erb-linter",
     "editor.formatOnSave": false
   },
-  "[javascript][typescript][typescriptreact]": {
+  "[javascript][typescript][typescriptreact][json]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.formatOnSave": true
   },
@@ -112,5 +129,8 @@
     "markdown": false,
     "html": false
   },
-  "githubPullRequests.terminalLinksHandler": "github"
+  "githubPullRequests.terminalLinksHandler": "github",
+  "githubPullRequests.pullBranch": "never",
+  "erb.erb-lint.pathToBundler": "bin/bundle",
+  "workbench.editor.empty.hint": "hidden"
 }

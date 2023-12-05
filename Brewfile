@@ -1,4 +1,5 @@
 tap "homebrew/cask"
+tap "homebrew/cask-fonts"
 
 brew "gh"
 brew "fzf"
@@ -11,6 +12,7 @@ brew "vim"
 brew "zsh"
 brew "zsh-autosuggestions"
 
+cask "font-monaspace"
 cask "font-hasklig"
 cask "kitty"
 cask "raycast"
