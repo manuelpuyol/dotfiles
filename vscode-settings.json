@@ -26,7 +26,7 @@
   //terminal
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.defaultProfile.osx": "zsh",
-  "terminal.integrated.scrollback": 10000,
+  "terminal.integrated.scrollback": 100000,
   "terminal.integrated.tabs.enabled": true,
   "terminal.integrated.enableMultiLinePasteWarning": false,
   // workbench
@@ -106,7 +106,7 @@
   "[ruby]": {
     "editor.defaultFormatter": "misogi.ruby-rubocop",
     "editor.codeActionsOnSave": {
-      "editor.action.formatDocument": true
+      "editor.action.formatDocument": "explicit"
     }
   },
   "[html.erb]": {
@@ -132,5 +132,10 @@
   "githubPullRequests.terminalLinksHandler": "github",
   "githubPullRequests.pullBranch": "never",
   "erb.erb-lint.pathToBundler": "bin/bundle",
-  "workbench.editor.empty.hint": "hidden"
+  "workbench.editor.empty.hint": "hidden",
+  "remote.autoForwardPortsSource": "hybrid",
+  "[cpp]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+  "github.copilot.editor.enableAutoCompletions": true
 }

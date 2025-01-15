@@ -5,11 +5,22 @@
   "description": "Search the Internet for animated GIFs",
   "icon": "command-icon.png",
   "author": "josephschmitt",
+  "contributors": [
+    "tm.wrnr",
+    "j3lte",
+    "samuelkraft"
+  ],
   "license": "MIT",
   "categories": [
     "Media",
     "Fun",
     "Web"
+  ],
+  "keywords": [
+    "Tenor",
+    "Giphy",
+    "Finer",
+    "clips"
   ],
   "commands": [
     {
@@ -153,6 +164,7 @@
     "build": "ray build -e dist",
     "dev": "ray develop",
     "fix-lint": "ray lint --fix",
-    "lint": "ray lint"
+    "lint": "ray lint",
+    "publish": "npx @raycast/api@latest publish"
   }
 }
