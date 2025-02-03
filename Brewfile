@@ -1,6 +1,7 @@
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "hashicorp/tap"
+tap "font-monaspace"
 
 brew "gh"
 brew "fzf"
