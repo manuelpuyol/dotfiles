@@ -20,7 +20,7 @@
 [gc]
   writeCommitGraph = true
 [merge]
-  tool = meld
+	tool = accept-theirs
 [mergetool]
   prompt = false
 [mergetool "meld"]
@@ -35,3 +35,5 @@
 [user]
   name = Manuel Puyol
   email = manuelpuyol@github.com
+[pull]
+	rebase = false

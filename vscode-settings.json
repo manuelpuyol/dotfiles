@@ -137,5 +137,12 @@
   "[cpp]": {
     "editor.defaultFormatter": "xaver.clang-format"
   },
-  "github.copilot.editor.enableAutoCompletions": true
+  "github.copilot.editor.enableAutoCompletions": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "jest.runMode": "on-demand",
+  "remote.WSL.debug": true,
+  "vitest.rootConfig": "ui/packages/vite/vitest.config.ts",
+  "github.copilot.chat.agent.thinkingTool": true,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "byesig.opacity": 0.4
 }
