@@ -14,6 +14,7 @@ brew "vim"
 brew "zsh"
 brew "zsh-autosuggestions"
 brew "hashicorp/tap/terraform"
+brew "copilot-cli"
 
 cask "amethyst"
 cask "font-monaspace"
