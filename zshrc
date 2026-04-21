@@ -21,6 +21,7 @@ eval "$(rbenv init -)"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$PATH:$HOME/.rvm/bin:`go env GOPATH`/bin:/Applications/Tailscale.app/Contents/MacOS"
+export GITHUB_TOKEN="$(gh auth token)"
 
 git update-index --skip-worktree .vscode/settings.json
