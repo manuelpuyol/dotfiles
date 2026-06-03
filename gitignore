@@ -8,3 +8,17 @@ CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
 install_manifest.txt
+
+# Per-machine git overrides (generated, may contain signing keys).
+.gitconfig.local
+
+# Generated/cached app data that should not be version-controlled.
+config/spicetify/Extracted/
+config/spicetify/Backup/
+config/spicetify/CustomApps/
+config/raycast/extensions/
+config/raycast/ai/
+
+# Credentials and local app state (never commit tokens).
+config/gh/hosts.yml
+config/configstore/

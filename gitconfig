@@ -7,17 +7,11 @@
   quotepath = on
 [credential]
   helper = dotfiles
-[difftool]
-  prompt = false
 [fetch]
   prune = true
   writeCommitGraph = true
 [gc]
   writeCommitGraph = true
-[merge]
-	tool = accept-theirs
-[mergetool]
-  prompt = false
 [protocol]
   version = 2
 [push]
