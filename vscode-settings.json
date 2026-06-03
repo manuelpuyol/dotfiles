@@ -1,5 +1,5 @@
 {
-  // editor
+  // ===== Editor =====
   "editor.fontFamily": "'Monaspace Krypton Light', monospace",
   "editor.fontLigatures": "'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03'",
   "editor.formatOnSave": false,
@@ -8,10 +8,9 @@
   "editor.tabSize": 2,
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
-  // explorer
-  "explorer.confirmDelete": false,
-  "explorer.confirmDragAndDrop": false,
-  // files
+  "editor.multiCursorLimit": 100000,
+
+  // ===== Files =====
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "files.exclude": {
@@ -19,19 +18,32 @@
     "vendor/bundle": true,
     "**/*.tsbuildinfo": true
   },
-  // search
+
+  // ===== Explorer =====
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+
+  // ===== Search =====
   "search.exclude": {
     "vendor/": true
   },
-  //terminal
+
+  // ===== Diff =====
+  "diffEditor.ignoreTrimWhitespace": false,
+
+  // ===== Terminal =====
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.scrollback": 100000,
   "terminal.integrated.tabs.enabled": true,
   "terminal.integrated.enableMultiLinePasteWarning": false,
-  // workbench
+  "terminal.integrated.initialHint": false,
+
+  // ===== Workbench / Window =====
   "workbench.colorTheme": "Ayu Mirage",
   "workbench.startupEditor": "newUntitledFile",
+  "workbench.editor.empty.hint": "hidden",
+  "window.confirmBeforeClose": "keyboardOnly",
   "workbench.colorCustomizations": {
     "terminal.background": "#282a36",
     "terminalCursor.background": "#282a36",
@@ -55,34 +67,32 @@
     "terminal.ansiBrightCyan": "#9aedfe",
     "terminal.ansiBrightWhite": "#eff0eb"
   },
-  // Extensions
-  // Copilot
-  "copilot.enabled": {
-    "*": true,
-    "yaml": false,
-    "plaintext": false,
-    "markdown": true
+
+  // ===== Languages =====
+  "[ruby]": {
+    "editor.defaultFormatter": "misogi.ruby-rubocop",
+    "editor.codeActionsOnSave": {
+      "editor.action.formatDocument": "explicit"
+    }
   },
-  // GitLens
-  "gitlens.codeLens.enabled": false,
-  // GitHub Issues
-  "githubIssues.ignoreCompletionTrigger": [
-    "python",
-    "makefile",
-    "ruby",
-    "erb"
-  ],
-  // Rails
-  "rails.editor.formatOnSave": false,
-  // Test Explorer
-  "testExplorer.addToEditorContextMenu": true,
-  "testExplorer.hideEmptyLog": false,
-  "rubyTestExplorer.logpanel": true,
-  // Workspace Explorer
-  "workspaceExplorer.workspaceStorageDirectory": "/Users/manuelpuyol/vscode",
-  // Rubocop
+  "[html.erb]": {
+    "editor.defaultFormatter": "manuelpuyol.erb-linter",
+    "editor.formatOnSave": false
+  },
+  "[erb]": {
+    "editor.defaultFormatter": "manuelpuyol.erb-linter",
+    "editor.formatOnSave": false
+  },
+  "[javascript][typescript][typescriptreact][json]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnSave": true
+  },
+
+  // ===== Rubocop =====
   "ruby.rubocop.useBundler": true,
-  // ESLint
+  "erb.erb-lint.pathToBundler": "bin/bundle",
+
+  // ===== ESLint =====
   "eslint.format.enable": true,
   "eslint.codeActionsOnSave.mode": "problems",
   "eslint.validate": [
@@ -102,26 +112,8 @@
       "pattern": "./ui/packages/*/"
     }
   ],
-  // Languages
-  "[ruby]": {
-    "editor.defaultFormatter": "misogi.ruby-rubocop",
-    "editor.codeActionsOnSave": {
-      "editor.action.formatDocument": "explicit"
-    }
-  },
-  "[html.erb]": {
-    "editor.defaultFormatter": "manuelpuyol.erb-linter",
-    "editor.formatOnSave": false
-  },
-  "[erb]": {
-    "editor.defaultFormatter": "manuelpuyol.erb-linter",
-    "editor.formatOnSave": false
-  },
-  "[javascript][typescript][typescriptreact][json]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-    "editor.formatOnSave": true
-  },
-  "security.workspace.trust.untrustedFiles": "open",
+
+  // ===== GitHub Copilot =====
   "github.copilot.enable": {
     "*": true,
     "yaml": false,
@@ -129,24 +121,23 @@
     "markdown": false,
     "html": false
   },
+  "github.copilot.editor.enableAutoCompletions": true,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.chat.agent.thinkingTool": true,
+  "github.copilot.chat.agentDebugLog.fileLogging.enabled": true,
+
+  // ===== GitHub Issues / Pull Requests =====
+  "githubIssues.ignoreCompletionTrigger": [
+    "python",
+    "makefile",
+    "ruby",
+    "erb"
+  ],
   "githubPullRequests.terminalLinksHandler": "github",
   "githubPullRequests.pullBranch": "never",
-  "erb.erb-lint.pathToBundler": "bin/bundle",
-  "workbench.editor.empty.hint": "hidden",
-  "remote.autoForwardPortsSource": "hybrid",
-  "[cpp]": {
-    "editor.defaultFormatter": "xaver.clang-format"
-  },
-  "github.copilot.editor.enableAutoCompletions": true,
-  "diffEditor.ignoreTrimWhitespace": false,
-  "jest.runMode": "on-demand",
-  "remote.WSL.debug": true,
-  "github.copilot.chat.agent.thinkingTool": true,
-  "github.copilot.nextEditSuggestions.enabled": true,
-  "byesig.opacity": 0.4,
-  "editor.multiCursorLimit": 100000,
-  "terminal.integrated.initialHint": false,
-  "@azure.argTenant": "",
+
+  // ===== Chat =====
+  "chat.viewSessions.orientation": "stacked",
   "chat.tools.urls.autoApprove": {
     "https://code.visualstudio.com": true,
     "https://github.com/microsoft/vscode/wiki/*": true,
@@ -160,7 +151,11 @@
       "approveResponse": true
     }
   },
-  "window.confirmBeforeClose": "keyboardOnly",
-  "chat.viewSessions.orientation": "stacked",
-  "github.copilot.chat.agentDebugLog.fileLogging.enabled": true,
+
+  // ===== Remote =====
+  "remote.autoForwardPortsSource": "hybrid",
+  "remote.WSL.debug": true,
+
+  // ===== Security =====
+  "security.workspace.trust.untrustedFiles": "open"
 }
