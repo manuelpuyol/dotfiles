@@ -2,6 +2,7 @@ tap "hashicorp/tap"
 
 brew "gh"
 brew "fzf"
+brew "jq"
 brew "mpv"
 brew "nvm"
 brew "rbenv"

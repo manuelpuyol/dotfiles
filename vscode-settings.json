@@ -154,7 +154,11 @@
       "approveRequest": false,
       "approveResponse": true
     },
-    "https://www.npmjs.com": true
+    "https://www.npmjs.com": true,
+    "https://api.github.com": {
+      "approveRequest": false,
+      "approveResponse": true
+    }
   },
   "window.confirmBeforeClose": "keyboardOnly",
   "chat.viewSessions.orientation": "stacked",

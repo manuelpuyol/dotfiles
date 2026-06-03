@@ -59,6 +59,79 @@ fi
 brew bundle --file="$DOTFILESDIR/Brewfile"
 [ "$MACOS" ] && brew bundle --file="$DOTFILESDIR/Brewfile.macos"
 
+# Homebrew Cask is macOS-only, so install the GUI apps and fonts from the
+# native package manager / upstream releases on a real (non-Codespaces) Linux
+# desktop.
+if [ "$LINUX" ] && [ -z "$CODESPACES" ]
+then
+  if command -v apt >/dev/null
+  then
+    sudo apt-get install -y kitty firefox
+  elif command -v pacman >/dev/null
+  then
+    sudo pacman -S --needed --noconfirm kitty firefox
+  else
+    echo "Unknown package manager; install kitty and firefox manually." >&2
+  fi
+
+  # Fonts: download the OTF/TTF release zips into the user font directory.
+  FONTDIR="$HOME/.local/share/fonts"
+  mkdir -p "$FONTDIR"
+
+  # Resolve a release asset download URL from the GitHub API.
+  # $1 = owner/repo, $2 = regex matching the asset filename.
+  # To avoid pulling a freshly published (potentially compromised) release, we
+  # pick the newest release that is at least 7 days old. Falls back to a pinned
+  # URL if the API is unavailable (e.g. rate-limited) or jq is missing.
+  latest_asset_url() {
+    command -v jq >/dev/null || return
+    api="https://api.github.com/repos/$1/releases?per_page=100"
+    cutoff="$(date -u -d '7 days ago' +%Y-%m-%dT%H:%M:%SZ 2>/dev/null)" || return
+    curl -fsSL ${GITHUB_TOKEN:+-H "Authorization: Bearer $GITHUB_TOKEN"} "$api" 2>/dev/null \
+      | jq -r --arg cutoff "$cutoff" --arg pat "$2" '
+          [ .[] | select(.prerelease == false and .draft == false)
+                | select(.published_at <= $cutoff) ]
+          | sort_by(.published_at) | reverse
+          | .[].assets[].browser_download_url
+          | select(test($pat))' 2>/dev/null \
+      | head -n1
+  }
+
+  install_font_zip() {
+    # $1 = friendly name (also used as the install marker), $2 = zip URL
+    if [ -d "$FONTDIR/$1" ]
+    then
+      echo "Font '$1' already installed."
+      return
+    fi
+    if [ -z "$2" ]
+    then
+      echo "Could not resolve a download URL for font '$1'; skipping." >&2
+      return
+    fi
+    tmpdir="$(mktemp -d)"
+    if curl -fsSL "$2" -o "$tmpdir/font.zip" && unzip -q "$tmpdir/font.zip" -d "$tmpdir"
+    then
+      mkdir -p "$FONTDIR/$1"
+      find "$tmpdir" -type f \( -iname '*.otf' -o -iname '*.ttf' \) \
+        -exec cp {} "$FONTDIR/$1/" \;
+    else
+      echo "Failed to install font '$1'." >&2
+    fi
+    rm -rf "$tmpdir"
+  }
+
+  monaspace_url="$(latest_asset_url githubnext/monaspace 'monaspace-static-.*\.zip')"
+  install_font_zip Monaspace \
+    "${monaspace_url:-https://github.com/githubnext/monaspace/releases/download/v1.400/monaspace-static-v1.400.zip}"
+
+  hasklig_url="$(latest_asset_url i-tu/Hasklig 'Hasklig-.*\.zip')"
+  install_font_zip Hasklig \
+    "${hasklig_url:-https://github.com/i-tu/Hasklig/releases/download/v1.2/Hasklig-1.2.zip}"
+
+  command -v fc-cache >/dev/null && fc-cache -f "$FONTDIR"
+fi
+
 # Install all VSCode extensions if not in a codespace
 if [ -n "$CODESPACES" ]
 then
