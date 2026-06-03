@@ -41,32 +41,26 @@ echo
 
 for DOTFILE in *; do
   HOMEFILE="$HOME/.$DOTFILE"
-  [ -d $DOTFILE ] && DOTFILE="$DOTFILE/"
+  [ -d "$DOTFILE" ] && DOTFILE="$DOTFILE/"
   DIRFILE="$DOTFILESDIR/$DOTFILE"
 
-  # Don't try to install documentation/script/lock files
-  echo $DOTFILE | egrep -q '(^script/$|\.txt$|\.md$)' && continue
+  # Don't install docs, scripts, lock files or Brewfiles (read in place by
+  # install-packages).
+  echo "$DOTFILE" | egrep -q '(^script/$|^Brewfile|\.txt$|\.md$)' && continue
 
   # Fixup VSCode settings path
-  echo $DOTFILE | grep -q 'vscode-settings' &&
+  echo "$DOTFILE" | grep -q 'vscode-settings' &&
        HOMEFILE="$VSCODE/settings.json" &&
        mkdir -p "$VSCODE"
 
   # Fixup VSCode keybindings path
-  echo $DOTFILE | grep -q 'vscode-keybindings' &&
+  echo "$DOTFILE" | grep -q 'vscode-keybindings' &&
        HOMEFILE="$VSCODE/keybindings.json" &&
        mkdir -p "$VSCODE"
 
-  if [ $MACOS ]
-  then
-    # Fixup Brewfile
-    echo $DOTFILE | grep -q 'Brewfile' &&
-        HOMEFILE="$HOME/$(echo $DOTFILE | sed -e 's/\.B/B/')"
-  fi
-
   if [ $UNIX ]
   then
-    if [ -L "$HOMEFILE" ] && ! [ -d $DOTFILE ]
+    if [ -L "$HOMEFILE" ] && ! [ -d "$DOTFILE" ]
     then
       ln -sfv "$DIRFILE" "$HOMEFILE"
     else
@@ -84,4 +78,4 @@ then
   ln -sf "$DOTFILESDIR" "$HOMEDOTFILES"
 fi
 
-$SCRIPTPATH/install-packages
+"$SCRIPTPATH/install-packages"

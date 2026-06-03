@@ -1,6 +1,8 @@
 #!/bin/bash
+# Install packages and shell tooling on macOS, Linux and Codespaces.
 
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+DOTFILESDIR="$( cd -- "$SCRIPTPATH/.." >/dev/null 2>&1 ; pwd -P )"
 
 echo
 echo
@@ -10,82 +12,58 @@ echo "##################################################"
 echo
 echo
 
-[ $(uname -s) = "Darwin" ] && export MACOS=1
-[ $(uname -s) = "Linux" ] && export LINUX=1
+[ "$(uname -s)" = "Darwin" ] && export MACOS=1
+[ "$(uname -s)" = "Linux" ] && export LINUX=1
 
-cd $HOME
-
-# oh-my-zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-# zsh-syntax-highlight
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-if [ $MACOS ]
+# oh-my-zsh (idempotent, non-interactive so it doesn't hijack the shell)
+if [ ! -d "$HOME/.oh-my-zsh" ]
 then
-  # homebrew
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-  # Install packages
-  brew bundle
-elif [ $LINUX ]
-then
-  packages=(
-    fzf
-    git
-    kitty
-    rbenv
-    zsh
-    vim
-  )
-  # Arch
-  if command -v pacman &> /dev/null
-  then
-    packages+=(nvm otf-hasklig starship)
-    sudo pacman -S git base-devel github-cli
-
-    # Install YaY
-    git clone https://aur.archlinux.org/yay.git
-    cd yay
-    makepkg -si
-    cd ..
-    rm -rf yay
-
-    for package in "${packages[@]}"
-    do
-      yay -Sy $package
-    done
-  elif command -v apt &> /dev/null
-  then
-    for package in "${packages[@]}"
-    do
-      sudo apt install -y $package
-    done
-
-    # gh
-    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-    sudo apt update
-    sudo apt install gh
-
-    # nvm
-    curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
-
-    # starship
-    FORCE=1 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
-  else
-    echo "I don't know how to install packages on your system."
-  fi
+  RUNZSH=no KEEP_ZSHRC=yes sh -c \
+    "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
+    "" --unattended
 fi
+
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+
+clone_if_missing() {
+  [ -d "$2" ] || git clone --depth=1 "$1" "$2"
+}
+clone_if_missing https://github.com/zsh-users/zsh-autosuggestions \
+  "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+clone_if_missing https://github.com/zsh-users/zsh-syntax-highlighting.git \
+  "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+
+# Homebrew is used on macOS, Linux and Codespaces for a consistent toolchain.
+if ! command -v brew >/dev/null
+then
+  if [ "$LINUX" ] && command -v apt >/dev/null
+  then
+    # Homebrew build prerequisites on Debian/Ubuntu/Codespaces
+    sudo apt-get update
+    sudo apt-get install -y build-essential procps curl file git zsh
+  fi
+  NONINTERACTIVE=1 /bin/bash -c \
+    "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Load brew into the current shell
+if [ "$MACOS" ]
+then
+  eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"
+elif [ -d /home/linuxbrew/.linuxbrew ]
+then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+# Install cross-platform formulae everywhere, casks only on macOS
+brew bundle --file="$DOTFILESDIR/Brewfile"
+[ "$MACOS" ] && brew bundle --file="$DOTFILESDIR/Brewfile.macos"
 
 # Install all VSCode extensions if not in a codespace
 if [ -n "$CODESPACES" ]
 then
-  echo "in codespace"
+  echo "in codespace, skipping VSCode extension install"
 else
-  $SCRIPTPATH/install-vscode-extensions
+  "$SCRIPTPATH/install-vscode-extensions"
 fi
 

@@ -2,11 +2,13 @@
 # Run by github/github codespaces after starting
 
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+DOTFILESDIR="$( cd -- "$SCRIPTPATH/.." >/dev/null 2>&1 ; pwd -P )"
 
 # Always want to use ZSH as my default shell (e.g. for SSH)
-if ! grep -q "root.*/bin/zsh" /etc/passwd
+if ! grep -q "$(whoami).*/bin/zsh" /etc/passwd
 then
-  sudo chsh -s /bin/zsh $(whoami)
+  sudo chsh -s /bin/zsh "$(whoami)"
 fi
 
-$SCRIPTPATH/install-vscode-extensions
+# Symlink dotfiles and install packages
+"$DOTFILESDIR/script/setup"

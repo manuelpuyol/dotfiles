@@ -37,3 +37,47 @@ add_to_path_end "$HOME/.dotfiles/bin"
 
 # Run rbenv if it exists
 quiet_which rbenv && add_to_path_start "$(rbenv root)/shims"
+
+# Node.js / nvm
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+
+# Load nvm without selecting a version yet (faster shell startup); load_nvmrc
+# picks the right version per-directory below. Handles git- and brew-installed
+# nvm on macOS and Linux.
+if ! quiet_which nvm; then
+  for nvm_sh in \
+    "$NVM_DIR/nvm.sh" \
+    "/opt/homebrew/opt/nvm/nvm.sh" \
+    "/usr/local/opt/nvm/nvm.sh" \
+    "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"
+  do
+    if [ -s "$nvm_sh" ]; then
+      \. "$nvm_sh" --no-use
+      break
+    fi
+  done
+  unset nvm_sh
+fi
+
+# Switch Node.js version automatically based on the nearest .nvmrc.
+# https://github.com/nvm-sh/nvm#calling-nvm-use-automatically-in-a-directory-with-a-nvmrc-file
+load_nvmrc() {
+  quiet_which nvm || return
+
+  load_nvmrc_oldpwd="${1-}"
+  load_nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "${load_nvmrc_path}" ]; then
+    load_nvmrc_node_version="$(nvm version "$(cat "${load_nvmrc_path}")")"
+
+    if [ "${load_nvmrc_node_version}" = "N/A" ]; then
+      nvm install && hash -r
+    elif [ "${load_nvmrc_node_version}" != "$(nvm version)" ]; then
+      nvm use && hash -r
+    fi
+  elif [ -n "${load_nvmrc_oldpwd}" ] && [ -n "$(PWD="${load_nvmrc_oldpwd}" nvm_find_nvmrc)" ] && [ -n "${NVM_BIN-}" ]; then
+    nvm deactivate && hash -r
+  fi
+
+  unset load_nvmrc_oldpwd load_nvmrc_path load_nvmrc_node_version
+}

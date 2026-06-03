@@ -2,7 +2,6 @@
 source ~/.shrc
 
 export ZSH="$HOME/.oh-my-zsh"
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 
 ZSH_THEME="robbyrussell"
 
@@ -10,18 +9,30 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
-alias pvc="cd ~/primer/view_components"
-alias gdev="cd ~/Documents/gamedev"
-alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+# macOS-only: Tailscale CLI lives inside the app bundle
+if [ "$(uname -s)" = "Darwin" ]; then
+  alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+  add_to_path_end "/Applications/Tailscale.app/Contents/MacOS"
+fi
 
-eval "$(starship init zsh)"
-eval "$(rbenv init -)"
+quiet_which starship && eval "$(starship init zsh)"
+quiet_which rbenv && eval "$(rbenv init -)"
 
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Switch Node.js version automatically when changing directories (.nvmrc).
+# load_nvmrc and nvm itself are loaded in ~/.shrc.
+if quiet_which load_nvmrc; then
+  autoload -Uz add-zsh-hook
+  load_nvmrc_on_chpwd() { load_nvmrc "${OLDPWD}" }
+  add-zsh-hook chpwd load_nvmrc_on_chpwd
+  load_nvmrc
+fi
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin:`go env GOPATH`/bin:/Applications/Tailscale.app/Contents/MacOS"
-export GITHUB_TOKEN="$(gh auth token)"
+# Load nvm completions if available
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-git update-index --skip-worktree .vscode/settings.json
+# Add Go bin to PATH only if Go is installed
+quiet_which go && add_to_path_end "$(go env GOPATH)/bin"
+add_to_path_end "$HOME/.rvm/bin"
+
+# Export a GitHub token if gh is installed and authenticated
+quiet_which gh && export GITHUB_TOKEN="$(gh auth token 2>/dev/null)"

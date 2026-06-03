@@ -156,6 +156,7 @@
     },
     "https://www.npmjs.com": true
   },
-  "chat.viewSessions.orientation": "stacked",
   "window.confirmBeforeClose": "keyboardOnly",
+  "chat.viewSessions.orientation": "stacked",
+  "github.copilot.chat.agentDebugLog.fileLogging.enabled": true,
 }
