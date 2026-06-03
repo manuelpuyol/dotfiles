@@ -2,11 +2,10 @@
 # Installed in addition to the cross-platform Brewfile.
 
 cask "amethyst"
+cask "copilot-cli"
 cask "font-monaspace"
 cask "font-hasklig"
 cask "kitty"
 cask "raycast"
 cask "firefox"
 cask "scroll-reverser"
-cask "slack"
-cask "zoom"

@@ -59,6 +59,21 @@ fi
 brew bundle --file="$DOTFILESDIR/Brewfile"
 [ "$MACOS" ] && brew bundle --file="$DOTFILESDIR/Brewfile.macos"
 
+# GitHub Copilot CLI ships as a macOS cask (installed via Brewfile.macos above).
+# On Linux/Codespaces install it from npm instead. nvm is loaded by ~/.shrc,
+# but this script runs non-interactively, so source nvm here if needed.
+if [ "$LINUX" ]
+then
+  [ -s "${NVM_DIR:-$HOME/.nvm}/nvm.sh" ] && \. "${NVM_DIR:-$HOME/.nvm}/nvm.sh"
+  if command -v npm >/dev/null
+  then
+    npm list -g --depth=0 @github/copilot >/dev/null 2>&1 \
+      || npm install -g @github/copilot
+  else
+    echo "npm not found; skipping GitHub Copilot CLI install." >&2
+  fi
+fi
+
 # Homebrew Cask is macOS-only, so install the GUI apps and fonts from the
 # native package manager / upstream releases on a real (non-Codespaces) Linux
 # desktop.
