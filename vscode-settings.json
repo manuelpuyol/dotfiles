@@ -41,6 +41,9 @@
   "terminal.integrated.tabs.enabled": true,
   "terminal.integrated.enableMultiLinePasteWarning": false,
   "terminal.integrated.initialHint": false,
+  // Don't revive/replay old terminal processes on window reload — with a large
+  // scrollback this replay is the main cause of multi-second terminal startup.
+  "terminal.integrated.persistentSessionReviveProcess": "never",
 
   // ===== Workbench / Window =====
   "workbench.colorTheme": "Ayu Mirage",

@@ -5,6 +5,10 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
+# Skip oh-my-zsh's completion-dir security audit (compaudit) on startup; the
+# completion dirs are our own, and this shaves time off every shell launch.
+ZSH_DISABLE_COMPFIX="true"
+
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
@@ -16,7 +20,9 @@ if [ "$(uname -s)" = "Darwin" ]; then
 fi
 
 quiet_which starship && eval "$(starship init zsh)"
-quiet_which rbenv && eval "$(rbenv init -)"
+# Shims are already on PATH (see ~/.shrc), so skip the startup rehash for a
+# faster shell. Run `rbenv rehash` manually after installing new gem binaries.
+quiet_which rbenv && eval "$(rbenv init - --no-rehash zsh)"
 
 # Switch Node.js version automatically when changing directories (.nvmrc).
 # load_nvmrc and nvm itself are loaded in ~/.shrc.
@@ -32,7 +38,6 @@ fi
 
 # Add Go bin to PATH only if Go is installed
 quiet_which go && add_to_path_end "$(go env GOPATH)/bin"
-add_to_path_end "$HOME/.rvm/bin"
 
 # Export a GitHub token if gh is installed and authenticated
 quiet_which gh && export GITHUB_TOKEN="$(gh auth token 2>/dev/null)"
