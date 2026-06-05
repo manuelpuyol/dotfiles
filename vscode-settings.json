@@ -163,5 +163,6 @@
   "remote.WSL.debug": true,
 
   // ===== Security =====
-  "security.workspace.trust.untrustedFiles": "open"
+  "security.workspace.trust.untrustedFiles": "open",
+  "@azure.argTenant": ""
 }
