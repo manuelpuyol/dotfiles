@@ -59,6 +59,25 @@ if ! quiet_which nvm; then
   unset nvm_sh
 fi
 
+# Put the default node version on PATH directly, without invoking nvm's slow
+# resolver (`nvm use`/`nvm version` are ~1s cold). This keeps `node` available
+# globally at ~0 startup cost; per-directory .nvmrc still overrides it via
+# load_nvmrc on cd below.
+nvm_activate_default() {
+  [ -d "$NVM_DIR/versions/node" ] || return
+
+  nvm_default_alias="$(cat "$NVM_DIR/alias/default" 2>/dev/null)"
+  case "$nvm_default_alias" in
+    v[0-9]*) nvm_default_bin="$NVM_DIR/versions/node/$nvm_default_alias/bin" ;;
+    [0-9]*)  nvm_default_bin="$(command ls -d "$NVM_DIR"/versions/node/v"$nvm_default_alias"*/bin 2>/dev/null | sort -V | tail -1)" ;;
+    *)       nvm_default_bin="$(command ls -d "$NVM_DIR"/versions/node/v*/bin 2>/dev/null | sort -V | tail -1)" ;;
+  esac
+
+  [ -n "$nvm_default_bin" ] && add_to_path_start "$nvm_default_bin"
+  unset nvm_default_alias nvm_default_bin
+}
+quiet_which nvm && nvm_activate_default
+
 # Switch Node.js version automatically based on the nearest .nvmrc.
 # https://github.com/nvm-sh/nvm#calling-nvm-use-automatically-in-a-directory-with-a-nvmrc-file
 load_nvmrc() {
@@ -76,7 +95,9 @@ load_nvmrc() {
       nvm use && hash -r
     fi
   elif [ -n "${load_nvmrc_oldpwd}" ] && [ -n "$(PWD="${load_nvmrc_oldpwd}" nvm_find_nvmrc)" ] && [ -n "${NVM_BIN-}" ]; then
+    # Left an .nvmrc directory: drop that version and restore the default.
     nvm deactivate && hash -r
+    nvm_activate_default
   fi
 
   unset load_nvmrc_oldpwd load_nvmrc_path load_nvmrc_node_version
