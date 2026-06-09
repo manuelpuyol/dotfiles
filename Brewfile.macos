@@ -1,6 +1,8 @@
 # macOS-only GUI apps and fonts (casks).
 # Installed in addition to the cross-platform Brewfile.
 
+cask "1password"
+cask "1password-cli"
 cask "amethyst"
 cask "copilot-cli"
 cask "font-monaspace"

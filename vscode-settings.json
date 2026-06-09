@@ -164,5 +164,9 @@
 
   // ===== Security =====
   "security.workspace.trust.untrustedFiles": "open",
-  "@azure.argTenant": ""
+  "@azure.argTenant": "",
+  "chat.tools.terminal.autoApprove": {
+    "git --no-pager worktree": true
+  },
+  "workbench.editor.useModal": "some"
 }
