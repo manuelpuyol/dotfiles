@@ -141,9 +141,6 @@
   ],
   "githubPullRequests.terminalLinksHandler": "github",
   "githubPullRequests.pullBranch": "never",
-
-  // ===== Chat =====
-  "chat.viewSessions.orientation": "stacked",
   "chat.tools.urls.autoApprove": {
     "https://code.visualstudio.com": true,
     "https://github.com/microsoft/vscode/wiki/*": true,
@@ -168,5 +165,7 @@
   "chat.tools.terminal.autoApprove": {
     "git --no-pager worktree": true
   },
-  "workbench.editor.useModal": "some"
+  "chat.remoteAgentHosts": [],
+  "workbench.editor.enablePreview": false,
+  "chat.viewSessions.orientation": "stacked"
 }
