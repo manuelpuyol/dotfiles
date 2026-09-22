@@ -2,6 +2,9 @@ config/configstore
 config/gatsby
 config/yarn
 config/karabiner/automatic_backups/
+config/1Password/telemetry-enabled
+config/raycast/aster-endpoint.json
+config/raycast/node-compile-cache/
 rbenv/shims/
 rbenv/versions/
 config/gh/hosts.yml

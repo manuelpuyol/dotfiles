@@ -167,5 +167,8 @@
   },
   "chat.remoteAgentHosts": [],
   "workbench.editor.enablePreview": false,
-  "chat.viewSessions.orientation": "stacked"
+  "chat.agent.maxRequests": 1000,
+  "chat.mcp.discovery.enabled": {
+    "copilot": true
+  }
 }
