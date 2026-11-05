@@ -66,6 +66,10 @@ re-run on its own:
   [`mcp-config.base.json`](copilot/mcp-config.base.json) into the existing
   `~/.copilot` files. Keys that only exist locally are kept, so MCP servers with
   tokens or internal hosts belong in `~/.copilot/mcp-config.json`, never here.
+  npx-based servers run through Central Feed Services with `gh cfs`, since
+  the public npm registry is blocked. That needs the
+  [`gh-cfs`](https://github.com/github/gh-cfs) extension and
+  `az login --tenant 398a6654-997b-47e9-b12b-9515b896b4de --allow-no-subscriptions`.
 
 Third-party skills are vendored from the repos in
 [`skill-sources.txt`](copilot/skill-sources.txt) and pinned in

@@ -5,9 +5,17 @@
       "url": "https://api.githubcopilot.com/mcp/"
     },
     "playwright": {
-      "command": "npx",
+      "command": "gh",
       "args": [
-        "@playwright/mcp@0.0.54"
+        "cfs",
+        "--",
+        "npx",
+        "--yes",
+        "--update-notifier=false",
+        "--loglevel=error",
+        "--package=@playwright/mcp@0.0.54",
+        "--",
+        "mcp-server-playwright"
       ]
     },
     "DataDog": {
@@ -29,10 +37,17 @@
     },
     "Kusto": {
       "type": "local",
-      "command": "npx",
+      "command": "gh",
       "args": [
-        "-y",
-        "@azure/mcp@latest",
+        "cfs",
+        "--",
+        "npx",
+        "--yes",
+        "--update-notifier=false",
+        "--loglevel=error",
+        "--package=@azure/mcp@4.0.0-beta.5",
+        "--",
+        "azmcp",
         "server",
         "start"
       ],
