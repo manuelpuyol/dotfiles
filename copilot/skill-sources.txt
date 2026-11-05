@@ -1,0 +1,4 @@
+# Third-party skills vendored into skills/ by sync-skills.sh.
+# Format: <owner/repo> <path to the skills folder> <comma-separated skill names>
+cursor/plugins pstack/skills blast-radius,tdd,unslop,why
+rstackjs/agent-skills skills rspack-best-practices,rspack-debugging,rspack-split-chunks,rspack-tracing,rspack-v2-upgrade,rstest-best-practices,rstest-debugging

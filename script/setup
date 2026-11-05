@@ -45,8 +45,8 @@ for DOTFILE in *; do
   DIRFILE="$DOTFILESDIR/$DOTFILE"
 
   # Don't install docs, scripts, lock files or Brewfiles (read in place by
-  # install-packages).
-  echo "$DOTFILE" | egrep -q '(^script/$|^Brewfile|\.txt$|\.md$)' && continue
+  # install-packages). copilot/ is wired into ~/.copilot by its own installer.
+  echo "$DOTFILE" | egrep -q '(^script/$|^copilot/$|^Brewfile|\.txt$|\.md$)' && continue
 
   # Fixup VSCode settings path
   echo "$DOTFILE" | grep -q 'vscode-settings' &&
@@ -79,3 +79,6 @@ then
 fi
 
 "$SCRIPTPATH/install-packages"
+
+# Runs after install-packages so jq is available for merging Copilot settings.
+"$DOTFILESDIR/copilot/install.sh"

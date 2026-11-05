@@ -29,6 +29,7 @@ safe — every step is idempotent.
 | [`script/setup`](script/setup) | Symlinks dotfiles into `$HOME`. |
 | [`script/install-packages`](script/install-packages) | Installs oh-my-zsh, plugins, Homebrew and packages. |
 | [`script/codespaces-post-start`](script/codespaces-post-start) | Codespaces hook: sets zsh as default shell and runs `setup`. |
+| [`copilot/`](copilot) | GitHub Copilot CLI config, wired into `~/.copilot` by [`copilot/install.sh`](copilot/install.sh) (see below). |
 
 ## Platform notes
 
@@ -49,3 +50,25 @@ Anything machine-specific (e.g. a work email or a commit-signing key) goes in
 [commit]
   gpgsign = true
 ```
+
+## GitHub Copilot
+
+`setup` runs [`copilot/install.sh`](copilot/install.sh), which is safe to
+re-run on its own:
+
+- Symlinks [`copilot-instructions.md`](copilot/copilot-instructions.md),
+  [`statusline.sh`](copilot/statusline.sh) and each file in
+  [`agents/`](copilot/agents) into `~/.copilot`.
+- Registers [`copilot/skills`](copilot/skills) in `settings.json`'s
+  `skillDirectories`, so private skills kept directly in `~/.copilot/skills`
+  keep working alongside these.
+- Merges [`settings.base.json`](copilot/settings.base.json) and
+  [`mcp-config.base.json`](copilot/mcp-config.base.json) into the existing
+  `~/.copilot` files. Keys that only exist locally are kept, so MCP servers with
+  tokens or internal hosts belong in `~/.copilot/mcp-config.json`, never here.
+
+Third-party skills are vendored from the repos in
+[`skill-sources.txt`](copilot/skill-sources.txt) and pinned in
+[`skills.lock`](copilot/skills.lock), with their licenses in
+[`licenses/`](copilot/licenses). To update them, run
+`copilot/sync-skills.sh [owner/repo ...]` and review the diff.
