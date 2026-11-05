@@ -1,0 +1,45 @@
+{
+  "mcpServers": {
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@0.0.54"
+      ]
+    },
+    "DataDog": {
+      "type": "http",
+      "url": "https://mcp.datadoghq.com/v1/mcp?toolsets=all",
+      "headers": {},
+      "tools": [
+        "*"
+      ],
+      "source": "user"
+    },
+    "Sentry": {
+      "type": "http",
+      "url": "https://mcp.sentry.dev/mcp",
+      "headers": {},
+      "tools": [
+        "*"
+      ]
+    },
+    "Kusto": {
+      "type": "local",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure/mcp@latest",
+        "server",
+        "start"
+      ],
+      "tools": [
+        "*"
+      ],
+      "source": "user"
+    }
+  }
+}
