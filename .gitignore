@@ -9,3 +9,4 @@ rbenv/shims/
 rbenv/versions/
 config/gh/hosts.yml
 config/op
+config/agency/
