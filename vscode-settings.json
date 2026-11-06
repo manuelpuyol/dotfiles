@@ -170,5 +170,16 @@
   "chat.agent.maxRequests": 1000,
   "chat.mcp.discovery.enabled": {
     "copilot": true
+  },
+  "chat.mcp.serverSampling": {
+    "GitHub Copilot CLI: Kusto": {
+      "allowedDuringChat": true
+    }
+  },
+  "accessibility.signals.chatUserActionRequired": {
+    "sound": "on"
+  },
+  "accessibility.signals.chatResponseReceived": {
+    "sound": "on"
   }
 }
